@@ -1,0 +1,74 @@
+def solution(p):
+    answer = ''
+    
+    answer = balance(p)
+    # u구하기.
+    # while len(v) != 0:
+    #     u,v = balance(p)
+    #     if right(u):
+    #         u2,v=balance(v)
+    # # u가 올바른 괄호문자열이라면
+    # print(right(u))
+    # if right(u):
+    #     while len(v) !=0:
+    #         u3,v = balance(v)
+    #         u = u + u3
+    #     return u    
+    # # u가 올바른 괄호문자열이 아니라면
+    # elif not right(u):
+    #     while len(v) !=0:
+    #         u2,v = balance(v)
+    #         u= u + u2
+    #     print(u)
+    #     answer= '('
+    
+    # if len(w) == 0:
+    #     return p
+    # else:
+    #     for i in w:
+    #         if i =='(':
+    #             x +=')'
+    #         elif i ==')':
+    #             x +='('
+    #     w = '(' + x[1:-1] + ')'
+                
+    return answer
+
+def balance(p):
+    if len(p) ==0:
+        return ''
+    x=''
+    R = 0
+    L = 0
+    w=''
+    for i in p:
+        if i == '(':
+            R+=1
+            w += i
+        elif i == ')':
+            L+=1
+            w+=i
+        if R == L and R > 0 and L>0:
+            v=p[len(w):]
+            if right(w) and len(v) ==0:
+                return w
+            elif right(w):
+                return w + balance(v)
+            elif not right(w):
+                #이거 잘 모르겠음.. + 재귀 함수 어렵당
+                for i in w[1:-1]:
+                    if i =='(':
+                        x +=')'
+                    elif i ==')':
+                        x +='('
+                return '(' + balance(v) + ')' + x
+                
+def right(u):
+    if len(u) ==0:
+        return ''
+    for i in range(len(u)//2):
+        u=u.replace('()','')
+    if len(u) ==0:
+        return True
+    else:
+        return False
